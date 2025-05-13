@@ -42,7 +42,7 @@ successor(node(Room, Keys, Path), node(Next, KeysNew, PathNew)) :-
 % BFS terminating condition: found the treasure
 bfs([node(Room, _, Path)|_], _, Actions) :-
     treasure(Room),  % If current room is the treasure room
-    reverse(Path, Actions).  % Reverse path to get the correct order
+    Path = Actions.  % Keep the path as is
 
 % BFS expansion: dequeue head, enqueue successors
 bfs([Node|Rest], Visited, Actions) :-
@@ -57,4 +57,3 @@ bfs([Node|Rest], Visited, Actions) :-
     append(Visited, NewStates, Visited2),  % Add newly visited states to Visited list
     append(Rest, NextNodes, Queue2),
     bfs(Queue2, Visited2, Actions).
-
